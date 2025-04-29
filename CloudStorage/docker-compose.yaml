@@ -1,0 +1,33 @@
+version: '5.1'
+volumes:
+  postgres_demo:
+services:
+  postgres_demo:
+    image: postgres:17.2
+    restart: "always"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRESQL_USER: 'postgres'
+      POSTGRESQL_PASSWORD: 'postgres'
+      POSTGRESQL_DB: 'postgres_demo'
+    volumes:
+      - postgres_demo:/var/lib/postgresql/data
+
+  appcloude:
+    image: 'back:3.0'
+    build: .
+    ports:
+      - '8085:8085'
+    depends_on:
+      - postgres_demo
+    environment:
+      POSTGRESQL_URL: 'postgres_demo'
+      POSTGRESQL_PASSWORD: 'postgres'
+      POSTGRESQL_USER: 'postgres'
+      POSTGRESQL_DB: 'postgres_demo'
+
+
+
+
+

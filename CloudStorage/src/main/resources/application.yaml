@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: CloudStorage
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_URL}:5432/${POSTGRESQL_DB}
+    username: ${POSTGRESQL_USER}
+    password: ${POSTGRESQL_PASSWORD}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+
+server:
+  port: 8085
+jwt:
+  secret: DfRJcgWFW4wrZpGtkCkzKVjjjzIDfuoowFoCoihhunAo3Ho0oHoxvrZo6Pymloul
+path:
+  storage: D:/Java/Netologia/Diplom/storage/
